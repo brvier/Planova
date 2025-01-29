@@ -1,0 +1,96 @@
+<FontButton@ButtonBehavior+Label>:
+    #font_name: 'data/fonts/fa-regular-400.ttf'
+    font_name: 'data/fonts/fa-solid-900.ttf'
+    font_size: sp(36)
+    text_size: self.size
+    halign: 'center'
+    valign: 'middle'
+
+
+<BottomBar@BoxLayout>:
+    orientation: "horizontal"
+    height: dp(64)
+    size_hint: 1, None
+    FontButton:
+        text: "\uf073" #Calendar
+        on_release: root.parent.push_replacement("dailies")
+    FontButton:
+        text: "\uf0ae" #Review
+        on_release: root.parent.push_replacement("review")
+    FontButton:
+        text: "\uf249" #Notes
+        on_release: root.parent.push_replacement("notes")
+    FontButton:
+        text: "\uf013" #Settings
+        on_release: root.parent.push_replacement("settings")
+
+
+<PlanovaRecycleView>:
+    viewclass: 'PlanovaListItem'
+    SelectableRecycleBoxLayout
+        default_size: None, None
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+        scroll_y: 0
+
+<PlanovaListItem>:
+    height: dp(48) if root.itemtype!=0 else dp(64)
+    padding: dp(10), dp(0), dp(0), dp(10)
+    size_hint: 1, None
+    spacing: dp(10)
+    on_release: self.edit(root.index)
+    canvas:
+        Color:
+            rgba: app.theme.BackgroundRGBA if root.itemtype==0 else app.theme.AccentBackgroundRGBA
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: app.theme.BackgroundRGBADarker
+        Rectangle:
+            pos: self.pos
+            size: self.size[0], dp(1)
+    BoxLayout:
+        size_hint: 1, 1
+        orientation: 'horizontal'
+        Label:
+            font_name:"awesome"
+            font_size:"16sp"
+            size_hint: None, None
+            size: (dp(24), dp(24)) if root.itemtype!=0 else (0,0)
+            text: "" if root.itemtype == 0 else ("\uf111" if root.itemtype == 1 else ("\uf133" if root.itemtype == 2 else ("\uf1ea" if root.itemtype==3 else "\uf249")))
+            pos_hint: {'center_y': 0.5}
+            color: app.theme.PrimaryColor if root.itemtype == 0 else (app.theme.TodoColor if root.itemtype == 1 else (app.theme.EventColor if root.itemtype == 2 else (app.theme.DailyColor if root.itemtype == 3 else app.theme.PrimaryColor)))
+
+        Widget:
+            size_hint: None, 1
+            width: dp(10) if root.itemtype != 0 else dp(0)
+
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                height: dp(26)
+                text: root.description
+                halign: 'left'
+                size_hint: 1, None
+                text_size: self.size
+                shorten: True
+                color: app.theme.AccentColor if root.selected else app.theme.PrimaryColor
+                font_size: sp(24) if root.itemtype == 0 else sp(14)
+                valign: 'middle'
+                halign: 'left'
+            Label:
+                text: root.modified if root.itemtype == 4 else (root.time if root.itemtype in (1,2,3) else '')
+                halign: 'left'
+                size_hint: 1, None
+                height: dp(0) if root.itemtype in (0,3) else dp(12)
+                text_size: self.size
+                shorten: True
+                color: app.theme.SecondAccentColor
+                font_size: sp(12) if root.itemtype != 4 else sp(12)
+                valign: 'middle'
+                halign: 'left'
+
+

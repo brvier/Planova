@@ -1,0 +1,33 @@
+<CircularButton>:
+    text: ''
+    font_name: 'Roboto'
+    font_size: '18sp'
+    color: 1,1,1,1
+    bg_color: .8, .2, .2, 1
+    angle:0
+    canvas.before:
+        PushMatrix
+        Color:
+            rgba: root.bg_color
+        Ellipse:
+            pos: self.pos
+            size: self.size
+        Rotate:
+            angle: root.angle
+            origin: self.center
+
+<PlanovaNotesRecycleView>:
+    viewclass: 'PlanovaListItem'
+    SelectableRecycleBoxLayout
+        default_size: 1, None
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+        scroll_y: 0
+
+
+<NotesScreen>
+    PlanovaNotesRecycleView:
+        data: root.notes
+        size_hint: 1,1

@@ -1,0 +1,12 @@
+
+<SettingsScreen>
+
+    BoxLayout:
+        orientation: "vertical"
+
+        Label:
+            text: "Current Screen: " + root.name
+
+        Button:
+            text: "GOTO HOME"
+            on_release: root.manager.pop()

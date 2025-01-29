@@ -1,0 +1,27 @@
+{
+    "dailies": {
+        "import": "from libs.uix.baseclass.dailies_screen import DailiesScreen",
+        "object": "DailiesScreen()",
+        "kv": "libs/uix/kv/dailies_screen.kv"
+    },
+    "review": {
+        "import": "from libs.uix.baseclass.review_screen import ReviewScreen",
+        "object": "ReviewScreen()",
+        "kv": "libs/uix/kv/review_screen.kv"
+    },
+   "notes": {
+        "import": "from libs.uix.baseclass.notes_screen import NotesScreen",
+        "object": "NotesScreen()",
+        "kv": "libs/uix/kv/notes_screen.kv"
+    },
+    "note": {
+        "import": "from libs.uix.baseclass.note_screen import NoteScreen",
+        "object": "NoteScreen()",
+        "kv": "libs/uix/kv/note_screen.kv"
+    },
+    "settings": {
+        "import": "from libs.uix.baseclass.settings_screen import SettingsScreen",
+        "object": "SettingsScreen()",
+        "kv": "libs/uix/kv/settings_screen.kv"
+    }
+}

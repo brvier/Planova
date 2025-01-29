@@ -1,0 +1,55 @@
+
+<NoteScreen>
+    BoxLayout:
+        orientation: "vertical"
+
+        ScrollView:
+            size_hint: 1, 1
+            id: note_scrlv
+            BoxLayout:
+                orientation: "vertical"
+                size_hint: 1, None
+                height: note_textinput.height
+
+                MDInput:
+                    size_hint: 1,None
+                    id: note_textinput
+                    text: root.content
+                    font_size: sp(14)
+                    focus: True
+                    on_text: root.content = self.text
+                    multiline: True
+                    background_color: (0,0,0,1)
+                    foreground_color: (1,1,1,1)
+                    unfocus_on_touch: False
+                    auto_indent: True
+                    replace_crlf: True
+                    height: max( (len(self._lines)+1) * self.line_height +dp(48), note_scrlv.height - dp(300))
+                    input_type: "text"
+                    keyboard_suggestions: True
+
+        BoxLayout:
+            orientation: "horizontal"
+            height: dp(48)
+            size_hint: 1, None
+            FontButton:
+                text: "\uf14a" #Todo
+                on_release: note_textinput.do_todo()
+            FontButton:
+                text: "\uf1dc" #Heading
+                on_release: note_textinput.do_heading()
+            FontButton:
+                text: "\uf03c" #Indent
+                on_release: note_textinput.do_indent()
+            FontButton:
+                text: "\uf03b" #Outdent
+                on_release: note_textinput.do_outdent()
+            FontButton:
+                text: "\uf0c5" #Copy
+                on_release: note_textinput.copy()
+            FontButton:
+                text: "\uf0ea" #Paste
+                on_release: note_textinput.paste()
+            FontButton:
+                text:  "\uf1da" #Undo
+                on_release: note_textinput.undo()
