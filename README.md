@@ -31,10 +31,13 @@ By using a more structured yet flexible approach with dailies Markdown files ins
   - [ ] folding notes sub folder
   - [ ] search
   - [ ] Share a note 
+- [ ] Implement preferences screen
+  - [ ] theme selection
 - [ ] Receive android intent
 - [ ] Optimizations
   - [x] lazy loading
   - [ ] cleaning code
+  - [ ] speed up transition
 - [ ] Syncing
   - [ ] git
   - [ ] ssh
