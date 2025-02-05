@@ -4,6 +4,10 @@ A future proof opinionated software to manage your life in plaintext : todo, age
 
 By using a more structured yet flexible approach with dailies Markdown files instead of a calendar.txt and todo.txt, Planova provides a more efficient, scalable, and user-friendly experience compared to MOrg.
 
+## Screenshot
+
+![Screenshot](https://github.com/brvier/Planova/blob/master/assets/Planova.png)
+
 ## File structure
 
 - Org
