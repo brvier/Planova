@@ -13,7 +13,7 @@ from functools import partial
 
 from kivy.app import App
 from kivy.core.window import Window
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, NumericProperty
 from kivy.clock import Clock
 from kivy.utils import platform
 from kivy.core.text import LabelBase
@@ -22,7 +22,7 @@ from libs.applibs.models import DailiesData
 from libs.uix.root import Root
 from libs.uix.baseclass.themes import Theme
 
-Window.softinput_mode = 'resize'
+Window.softinput_mode = ''
 
 ORG_PATH = os.path.expanduser("~/Org")
 if platform == "android":
@@ -36,6 +36,8 @@ class MainApp(App):
     dailies = ObjectProperty(DailiesData(), rebind=True)
     theme = ObjectProperty(Theme(), rebind=True)
 
+    keyboard_height = NumericProperty(0)
+
     def getOrgDir(self):
         return ORG_PATH
 
@@ -44,7 +46,7 @@ class MainApp(App):
 
         self.title = "Planova"
         Window.keyboard_anim_args = {"d": 0.1, "t": "linear"}
-        Window.softinput_mode = "below_target"
+        Window.softinput_mode = ""
         Clock.schedule_once(self.__init_later__, 0.1)
 
     def __init_later__(self, dt):

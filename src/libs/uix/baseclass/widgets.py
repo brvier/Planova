@@ -22,30 +22,24 @@ from kivy.uix.recycleview import RecycleView
 from pygments.lexers.markup import MarkdownLexer
 
 if platform == "android":
-    import android
+    from jnius import autoclass, cast
 
 vkeyboard_offset = 0
 
 BLANK_RE = re.compile(r"\s")
 URL_RE = re.compile(r"\b((https?|ftp|file)://\S+)")
 
-
 def get_android_vkeyboard_height():
-    print("get_android_vkeyboard_height")
-    global vkeyboard_offset
-    if platform == "android":
-        # for a unknow reason keyboard height can be negative when closed... and
-        # an offset persists when open : dirty work arround
-        h = android.get_keyboard_height()
-        print(h, vkeyboard_offset)
-        if not vkeyboard_offset:
-            if h < 0:
-                vkeyboard_offset = -h
-                h = 0
-        return h + vkeyboard_offset
-    else:
-        return Window.keyboard_height
-
+    if platform=='android':
+        PythonActivity = autoclass('org.kivy.android.PythonActivity')
+        Activity = cast('android.app.Activity', PythonActivity.mActivity)
+        Rect = autoclass('android.graphics.Rect')
+        root_window = Activity.getWindow()
+        view = root_window.getDecorView()
+        r = Rect()
+        view.getWindowVisibleDisplayFrame(r)
+        print(Window.height- (r.bottom-r.top))
+        return Window.height- (r.bottom-r.top)
 
 class CircularButton(
     ButtonBehavior,
@@ -71,7 +65,7 @@ class MTextInput(TextInput):
             lambda dt: self.trigger_keyboard_height.cancel(), 1.0, interval=False
         )
 
-    def update_keyboard_height(self, dt):
+    def update_keyboard_height(self, _):
         if platform == "android":
             App.get_running_app().keyboard_height = get_android_vkeyboard_height()
 

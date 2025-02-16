@@ -1,3 +1,5 @@
+#:import Window kivy.core.window.Window
+
 <FontButton@ButtonBehavior+Label>:
     #font_name: 'data/fonts/fa-regular-400.ttf'
     font_name: 'data/fonts/fa-solid-900.ttf'
@@ -24,6 +26,10 @@
         text: "\uf013" #Settings
         on_release: root.parent.push_replacement("settings")
 
+<Root>:
+    pos: 0, app.keyboard_height
+    height: Window.height - app.keyboard_height
+    size_hint: 1, None
 
 <PlanovaRecycleView>:
     viewclass: 'PlanovaListItem'
