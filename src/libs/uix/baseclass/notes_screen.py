@@ -5,7 +5,6 @@ import datetime
 from kivy.app import App
 from kivy.uix.screenmanager import Screen
 from kivy.properties import (
-    DictProperty,
     ListProperty
 )
 from kivy.uix.recycleview import RecycleView
@@ -31,8 +30,8 @@ class Item:
 
 
 class Note(Item):
-    category = None
-    modified = None
+    category = ""
+    modified = 0
 
     def __init__(self, description, path):
         super(Note, self).__init__(description, path, lineno=None)
@@ -46,7 +45,7 @@ class Note(Item):
                 datetime.datetime.fromtimestamp(self.modified)
             ),
             "category": self.category,
-
+            "timestamp": self.modified,
             "path": self.path,
             "lineno": 0,
             "itemtype": 4,
@@ -61,7 +60,7 @@ class PlanovaNotesRecycleView(RecycleView):
 class NotesScreen(Screen):
     notes = ListProperty([])
 
-    def on_pre_enter(self, ):
+    def on_pre_enter(self, *_):
         self._load()
 
     def _load(self):
@@ -106,7 +105,7 @@ class NotesScreen(Screen):
                 )
                 for nn in n[k]:
                     print(type(nn), k, nn)
-                for nn in sorted(n[k], key=lambda x: x['modified'], reverse=True):
+                for nn in sorted(n[k], key=lambda x: x['timestamp'], reverse=True):
                     self.notes.append(nn)
         except KeyError:
             pass
