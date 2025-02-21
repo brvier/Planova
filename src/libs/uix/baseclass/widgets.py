@@ -137,6 +137,22 @@ class MDInput(CodeInput):
                 search_end = len(_text)
 
             print(_text[search_start:search_end])
+
+            if _text[search_start:search_end] == "[":
+                if _text[search_start-2:search_start+3] == "- [ ]":
+                    self.do_todo()
+
+            elif _text[search_start:search_end] == "]":
+                if _text[search_start-4:search_start+1] == "- [ ]":
+                    self.do_todo()
+            elif _text[search_start:search_end] == "[x]":
+                        self.text = "{}{}{}".format(
+                        _text[:search_start],
+                            "[ ]",
+                    _text[search_end:])
+ 
+
+
             selected_text = _text[search_start:search_end]
             g_url = URL_RE.search(_text, search_start, search_end)
 

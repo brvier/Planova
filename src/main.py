@@ -49,7 +49,7 @@ class MainApp(App):
         Window.softinput_mode = ""
         Clock.schedule_once(self.__init_later__, 0.1)
 
-    def __init_later__(self, dt):
+    def __init_later__(self, _):
         if not os.path.exists(os.path.join(ORG_PATH, "dailies")):
             os.makedirs(os.path.join(ORG_PATH, "dailies"))
         if not os.path.exists(os.path.join(ORG_PATH, "notes")):
@@ -102,15 +102,15 @@ class MainApp(App):
         print('open_note', path, lineno)
 
         self.root.sm.push("note")
-        Clock.schedule_once(partial(self._edit_note, path, lineno), 0)
+        Clock.schedule_once(partial(self._edit_note, path), 0)
 
-    def _edit_note(self, path, lineno, event):
+    def _edit_note(self, path, _):
         print(self.root.sm.children[0], type(path))
         self.root.sm.children[0].path = path
         self.root.sm.children[0].load_note()
 
 
-    def _edit_daily(self, dt,  event):
+    def _edit_daily(self, dt,  _):
         self.dt = dt
         self.root.sm.children[0].reload()
         self.root.sm.children[0].load_content()
