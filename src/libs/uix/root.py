@@ -57,7 +57,7 @@ class RootScreen(ScreenManager):
             Builder.load_file(utils.abs_path(screen["kv"]))
             # import screen class dynamically
             # (from libs.uix.baseclass.screen_py_file import ScreenObjectName)
-            exec(screen["import"])
+            exec(screen["import"], globals=globals())
             # calls the screen class to get the instance of it
             # (ScreenObjectName())
             screen_object = eval(screen["object"])

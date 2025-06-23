@@ -1,7 +1,9 @@
+#!/bin/env python3
+
 __author__ = "Benoît HERVIER"
 __copyright__ = "Copyright 2022, Benoît HERVIER"
 __license__ = "MIT"
-__version__ = "0.6.2"
+__version__ = "0.6.3"
 __email__ = "b@rvier.fr"
 __status__ = "Developpment"
 
